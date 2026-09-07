@@ -8,10 +8,16 @@ export async function onRequest(context) {
   const isGD =
     pathname === "/games/gd" ||
     pathname.startsWith("/games/gd/");
+  const isFlappy =
+    pathname === "/games/flappy" ||
+    pathname.startsWith("/games/flappy/");
   if (isDriftBoss) {
     return response;
   }
    if (isGD) {
+    return response;
+  }
+  if (isFlappy) {
     return response;
   }
   return new HTMLRewriter()
