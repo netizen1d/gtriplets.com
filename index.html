@@ -252,8 +252,13 @@
   <section class="hero">
     <h1>welcome to my website 👋</h1>
     <p>
-      scroll to look at some of my stuff 👀
+      this website is a work in progress. expect things to be broken.
+      <br><br>
+      🎮 more stuff coming soon!
     </p>
+      <a href="/games" class="btn">
+        check out my games (some with cheats 👀 )
+      </a>
     
 <div class="music-player">
   <div class="music-header">
@@ -311,14 +316,14 @@
   <main class="page-overviews" aria-label="Explore the website">
     <section class="overview" data-page="/games" aria-labelledby="games-heading">
       <div class="overview-heading"><h2 id="games-heading">🎮 games</h2><a href="/games">all games →</a></div>
-      <div class="overview-grid" aria-live="polite"><p class="overview-message">loading games…</p></div>
+      <div class="overview-grid" aria-live="polite"><p class="overview-message">Loading games…</p></div>
     </section>
-    <section class="overview" data-page="/live" aria-labelledby="blog-heading">
-      <div class="overview-heading"><h2 id="blog-heading">✍️ my blog</h2><a href="/blog">read my blog </a></div>
+    <section class="overview" data-page="/blog" aria-labelledby="blog-heading">
+      <div class="overview-heading"><h2 id="blog-heading">✍️ my blog</h2><a href="/live">read my blog→</a></div>
       <div class="overview-grid" aria-live="polite"><p class="overview-message">loading posts…</p></div>
     </section>
     <section class="overview" data-page="/changelog" aria-labelledby="changelog-heading">
-      <div class="overview-heading"><h2 id="changelog-heading">🛠️ changelog</h2><a href="/updates">all updates →</a></div>
+      <div class="overview-heading"><h2 id="changelog-heading">🛠️ updates </h2><a href="/updates">all updates →</a></div>
       <div class="overview-grid" aria-live="polite"><p class="overview-message">loading updates…</p></div>
     </section>
   </main>
@@ -341,6 +346,7 @@
         const root = doc.querySelector('main, [role="main"]') || doc.body;
         let entries = [...root.querySelectorAll('[data-overview-item]')];
         if (!entries.length) entries = [...root.querySelectorAll('article, .game-card, .post-card, .blog-post, .changelog-entry, .change-entry, .card')];
+        // Simpler pages can supply previews through headings and their next paragraph.
         if (!entries.length) entries = [...root.querySelectorAll('h2, h3')];
         const seen = new Set();
         const cards = [];
@@ -379,6 +385,7 @@
         grid.replaceChildren(p);
       } finally { clearTimeout(timeout); }
     }
+    // Start loading just before each section scrolls into view.
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => { if (entry.isIntersecting) { observer.unobserve(entry.target); loadOverview(entry.target); } });
